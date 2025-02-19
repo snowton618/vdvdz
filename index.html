@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Summarization App UI</title>
+  <style>
+    /* --- RESET / BASE STYLES --- */
+    * {
+      margin: 0; 
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* --- APP CONTAINER --- */
+    .app-container {
+      display: flex;
+      flex: 1; /* so it fills the vertical space */
+    }
+
+    /* --- SIDEBAR --- */
+    .sidebar {
+      width: 220px;
+      background-color: #1c1c1c;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      border-right: 1px solid #333;
+    }
+    .sidebar h2 {
+      font-size: 1.1rem;
+      font-weight: normal;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: 0.3s;
+    }
+    .sidebar h2:hover {
+      opacity: 1;
+    }
+
+    /* --- MAIN CONTENT AREA --- */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; /* push input bar to bottom */
+      overflow: hidden; /* so the summaries can scroll within */
+    }
+
+    /* --- SUMMARIES WRAPPER --- */
+    .summaries {
+      padding: 20px;
+      overflow-y: auto; /* scrollable area for multiple summaries */
+    }
+
+    .summary-card {
+      background-color: #1f1f1f;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    }
+
+    .summary-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .summary-header h3 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .icon-group {
+      display: flex;
+      gap: 8px;
+    }
+    .icon-group span {
+      width: 24px;
+      height: 24px;
+      background-color: #333;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: 0.2s;
+      font-size: 0.8rem;
+    }
+    .icon-group span:hover {
+      opacity: 1;
+    }
+
+    .summary-body {
+      font-size: 0.9rem;
+      line-height: 1.4;
+      color: #ccc;
+    }
+    .summary-body .original-input {
+      color: #888;
+      font-style: italic;
+      display: block;
+      margin-top: 8px;
+    }
+
+    /* --- INPUT SECTION (BOTTOM) --- */
+    .input-section {
+      background-color: #1c1c1c;
+      padding: 16px;
+      border-top: 1px solid #333;
+    }
+    .input-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .summarization-modes button {
+      background-color: #2a2a2a;
+      color: #ccc;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: 0.2s;
+    }
+    .summarization-modes button:hover {
+      background-color: #333;
+      color: #fff;
+    }
+    .text-input-area {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .text-input-area input[type="text"] {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #333;
+      border-radius: 6px;
+      background-color: #2a2a2a;
+      color: #fff;
+      outline: none;
+    }
+    .send-button {
+      background-color: #2a2a2a;
+      border: 1px solid #333;
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      color: #fff;
+      transition: 0.2s;
+    }
+    .send-button:hover {
+      background-color: #333;
+    }
+
+    /* --- SCROLLBAR STYLING (optional) --- */
+    .summaries::-webkit-scrollbar {
+      width: 8px;
+    }
+    .summaries::-webkit-scrollbar-track {
+      background: #1c1c1c;
+    }
+    .summaries::-webkit-scrollbar-thumb {
+      background-color: #333;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <h2>Summarization</h2>
+      <h2>Rate our App</h2>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+      <!-- SUMMARIES AREA -->
+      <div class="summaries" id="summaries">
+        <!-- Example Summary 1 -->
+        <div class="summary-card">
+          <div class="summary-header">
+            <h3>Summarized Text</h3>
+            <div class="icon-group">
+              <span title="Copy">📋</span>
+              <span title="Regenerate">🔄</span>
+            </div>
+          </div>
+          <div class="summary-body">
+            Elias loved time since childhood, fascinated by his grandfather's clock...
+            <span class="original-input">Input: Elias had always been fascinated by time...</span>
+          </div>
+        </div>
+
+        <!-- Example Summary 2 -->
+        <div class="summary-card">
+          <div class="summary-header">
+            <h3>Summarized Text</h3>
+            <div class="icon-group">
+              <span title="Copy">📋</span>
+              <span title="Regenerate">🔄</span>
+            </div>
+          </div>
+          <div class="summary-body">
+            “My name is Samuel Jackson and I played Mace Windu in Star Wars.”
+            <span class="original-input">Input: My name is Samuel Jackson and I played Mace Windu...</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- INPUT SECTION -->
+      <div class="input-section">
+        <!-- Summarization modes -->
+        <div class="input-row summarization-modes">
+          <button>Concise</button>
+          <button>Detailed</button>
+          <button>Bullet Point</button>
+        </div>
+        
+        <!-- Text input + send button -->
+        <div class="input-row text-input-area">
+          <input type="text" id="userInput" placeholder="Enter your text..." />
+          <button class="send-button" id="sendBtn">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Just a simple example of typing functionality
+    // so you can see new “summaries” appear (not actual AI logic).
+
+    const summariesContainer = document.getElementById('summaries');
+    const userInput = document.getElementById('userInput');
+    const sendBtn = document.getElementById('sendBtn');
+
+    sendBtn.addEventListener('click', () => {
+      const text = userInput.value.trim();
+      if (!text) return;
+
+      // Create a new summary card
+      const summaryCard = document.createElement('div');
+      summaryCard.className = 'summary-card';
+
+      summaryCard.innerHTML = `
+        <div class="summary-header">
+          <h3>Summarized Text</h3>
+          <div class="icon-group">
+            <span title="Copy">📋</span>
+            <span title="Regenerate">🔄</span>
+          </div>
+        </div>
+        <div class="summary-body">
+          <p style="color:#888; font-style: italic;">(Pretend AI Summary Here)</p>
+          <span class="original-input">Input: ${text}</span>
+        </div>
+      `;
+
+      // Append to the container
+      summariesContainer.appendChild(summaryCard);
+
+      // Clear input
+      userInput.value = '';
+
+      // Auto-scroll to the bottom
+      summariesContainer.scrollTop = summariesContainer.scrollHeight;
+    });
+  </script>
+</body>
+</html>
