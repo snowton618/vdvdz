@@ -1,0 +1,175 @@
+/* --- RESET / BASE STYLES --- */
+* {
+  margin: 0; 
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: sans-serif;
+  background-color: #121212;
+  color: #ffffff;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- APP CONTAINER --- */
+.app-container {
+  display: flex;
+  flex: 1; /* so it fills the vertical space */
+}
+
+/* --- SIDEBAR --- */
+.sidebar {
+  width: 220px;
+  background-color: #1c1c1c;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-right: 1px solid #333;
+}
+.sidebar h2 {
+  font-size: 1.1rem;
+  font-weight: normal;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: 0.3s;
+}
+.sidebar h2:hover {
+  opacity: 1;
+}
+
+/* --- MAIN CONTENT AREA --- */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* push input bar to bottom */
+  overflow: hidden; /* so the summaries can scroll within */
+}
+
+/* --- SUMMARIES WRAPPER --- */
+.summaries {
+  padding: 20px;
+  overflow-y: auto; /* scrollable area for multiple summaries */
+}
+
+.summary-card {
+  background-color: #1f1f1f;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+.summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.summary-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.icon-group {
+  display: flex;
+  gap: 8px;
+}
+.icon-group span {
+  width: 24px;
+  height: 24px;
+  background-color: #333;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: 0.2s;
+  font-size: 0.8rem;
+}
+.icon-group span:hover {
+  opacity: 1;
+}
+
+.summary-body {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #ccc;
+}
+.summary-body .original-input {
+  color: #888;
+  font-style: italic;
+  display: block;
+  margin-top: 8px;
+}
+
+/* --- INPUT SECTION (BOTTOM) --- */
+.input-section {
+  background-color: #1c1c1c;
+  padding: 16px;
+  border-top: 1px solid #333;
+}
+.input-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.summarization-modes button {
+  background-color: #2a2a2a;
+  color: #ccc;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: 0.2s;
+}
+.summarization-modes button:hover {
+  background-color: #333;
+  color: #fff;
+}
+.text-input-area {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.text-input-area input[type="text"] {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  background-color: #2a2a2a;
+  color: #fff;
+  outline: none;
+}
+.send-button {
+  background-color: #2a2a2a;
+  border: 1px solid #333;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #fff;
+  transition: 0.2s;
+}
+.send-button:hover {
+  background-color: #333;
+}
+
+/* --- SCROLLBAR STYLING (optional) --- */
+.summaries::-webkit-scrollbar {
+  width: 8px;
+}
+.summaries::-webkit-scrollbar-track {
+  background: #1c1c1c;
+}
+.summaries::-webkit-scrollbar-thumb {
+  background-color: #333;
+  border-radius: 4px;
+}
